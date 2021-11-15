@@ -29,6 +29,7 @@ public class ipLocation {
     }
 
     private String getHttpResponse() throws IOException, InterruptedException {
+
         String ipLoc = getIp();
 
         HttpClient client = HttpClient.newHttpClient();
@@ -41,11 +42,13 @@ public class ipLocation {
         System.out.println(response.body());
 
         bodyResponse = response.body();
+
         return bodyResponse;
 
     }
 
     private String getIp() {
+
         System.setProperty("webdriver.chrome.driver", "C:\\TempHW\\chromedriver.exe");
 
         WebDriver driver = new ChromeDriver();
@@ -55,11 +58,13 @@ public class ipLocation {
         System.out.println("Your Ip is: " + ip);
         System.out.println("Continue to the validation step!");
         driver.quit();
+
         return ip;
 
     }
 
     private Object toJson(String jsonString) {
+
         JsonParser parser = new JsonParser();
         try {
             JsonElement json;
@@ -68,22 +73,26 @@ public class ipLocation {
             } else {
                 json = parser.parse(jsonString).getAsJsonObject();
             }
+
             return json;
+
         } catch (Exception e) {
+
             return jsonString;
         }
 
     }
 
     private void isIsrael(String countryResponse) {
+
         JsonObject jObjectResponse = (JsonObject) toJson(bodyResponse);
         country = jObjectResponse.getAsJsonPrimitive("country_name").getAsString();
         System.out.println(country);
+
         if (country.equals("Israel")) {
             System.out.println("Your country is Israel");
         } else {
             System.out.println("Your country is not Israel, try again");
         }
     }
-
 }
