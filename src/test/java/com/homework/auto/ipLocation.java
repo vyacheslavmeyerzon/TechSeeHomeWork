@@ -39,7 +39,7 @@ public class ipLocation {
 
         HttpResponse<String> response = client.send(request,
                 HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
+        System.out.println("Response is: " +response.body());
 
         bodyResponse = response.body();
 
@@ -87,7 +87,7 @@ public class ipLocation {
 
         JsonObject jObjectResponse = (JsonObject) toJson(bodyResponse);
         country = jObjectResponse.getAsJsonPrimitive("country_name").getAsString();
-        System.out.println(country);
+        System.out.println("Your country is:" +country);
 
         if (country.equals("Israel")) {
             System.out.println("Your country is Israel");
